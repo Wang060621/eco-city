@@ -1,0 +1,81 @@
+.city-grid-shell {
+    --city-grid-border: var(--color-border, #b7ccbd);
+    --city-grid-accent: var(--color-primary, #226244);
+    --city-grid-text: var(--color-text, #203b2c);
+    width: 100%;
+    min-width: 0;
+    color: var(--city-grid-text);
+    font-family: inherit;
+}
+
+.city-grid-shell .city-grid__instructions {
+    margin: 0 0 var(--space-3, 0.75rem);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.city-grid-shell .city-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--city-grid-columns, 6), minmax(0, 1fr));
+    gap: var(--space-2, 0.5rem);
+    width: 100%;
+    max-width: 42rem;
+    box-sizing: border-box;
+}
+
+.city-grid-shell .city-grid__cell {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    aspect-ratio: 1;
+    min-width: 0;
+    min-height: 0;
+    padding: 0.3rem;
+    border: 1px solid var(--city-grid-border);
+    border-radius: var(--radius-sm, 0.7rem);
+    background: var(--color-surface, #ffffff);
+    color: var(--city-grid-text);
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.city-grid-shell .city-grid__cell--empty { background: var(--color-surface-muted, #edf4ec); border-style: dashed; }
+.city-grid-shell .city-grid__cell--occupied { border-width: 2px; box-shadow: var(--shadow-sm, 0 2px 3px #203b2c0b); }
+.city-grid-shell .city-grid__cell--placement-target { border-color: var(--city-grid-accent); }
+.city-grid-shell .city-grid__cell--park,
+.city-grid-shell .city-grid__cell--recyclingCentre { background: #dcefd8; }
+.city-grid-shell .city-grid__cell--solarFarm { background: #fbefbe; }
+.city-grid-shell .city-grid__cell--windTurbine { background: #e0f0f5; }
+.city-grid-shell .city-grid__cell--coalPlant { background: #e2e3e5; }
+.city-grid-shell .city-grid__cell--road,
+.city-grid-shell .city-grid__cell--metro { background: #e6e7f4; }
+.city-grid-shell .city-grid__cell--residential { background: #f8e6d7; }
+.city-grid-shell .city-grid__cell:hover:not(:disabled) { border-color: var(--city-grid-accent); transform: translateY(-2px); }
+.city-grid-shell .city-grid__cell:focus-visible { outline: 3px solid var(--color-focus, #145fbd); outline-offset: 2px; position: relative; z-index: 1; }
+.city-grid-shell .city-grid__cell--disabled,
+.city-grid-shell .city-grid__cell:disabled { opacity: 0.6; cursor: not-allowed; }
+.city-grid-shell .city-grid__icon { font-size: clamp(1.1rem, 3.1vw, 2rem); line-height: 1.1; }
+.city-grid-shell .city-grid__cell--empty .city-grid__icon { color: #57745f; }
+.city-grid-shell .city-grid__name { max-width: 100%; font-size: clamp(0.58rem, 1.4vw, 0.75rem); line-height: 1.15; text-align: center; overflow-wrap: anywhere; }
+.city-grid-shell .city-grid__error { padding: 1rem; border: 1px solid #a84d32; border-radius: var(--radius-sm, 0.7rem); color: #713821; background: #fff3e9; }
+.city-grid-shell .city-grid__cell--newly-built { animation: city-grid-place 260ms ease-out; }
+
+@keyframes city-grid-place {
+    from { transform: scale(0.88); opacity: 0.6; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .city-grid-shell .city-grid { gap: 0.3rem; }
+    .city-grid-shell .city-grid__cell { padding: 0.15rem; border-radius: 0.4rem; gap: 0.1rem; }
+    .city-grid-shell .city-grid__instructions { font-size: 0.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .city-grid-shell .city-grid__cell { animation: none; transition: none; }
+    .city-grid-shell .city-grid__cell:hover:not(:disabled) { transform: none; }
+}
