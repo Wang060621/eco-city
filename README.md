@@ -1,41 +1,76 @@
-# Eco City · Developer 1 Delivery Package
+# Eco City
 
-This project follows `00_Common_Project_Standard.md` and `01_Lead_Developer_Architecture.md`. The delivery scope covers the **Lead Developer / Architecture application framework**.
+Eco City is a browser-based green city simulator built with Vite and vanilla JavaScript. Players plan a 6 × 6 city, place buildings, balance money, energy, carbon emissions and citizen happiness, and work towards the best environmental rating over ten turns.
 
-Completed: Vite project setup, shared state, event bus, responsive green city interface, welcome and help screens, module integration wiring, targeted tests, and integration and merge documentation.
+## Features
 
-**This is a runnable application framework. The final features from Developers 2–6 have not yet been integrated.** Building prices and effects use clearly marked zero-value preview data. Building placement, ending turns, and saving display “Not yet available” messages without generating simulated game results or saved games. Once the other developers deliver their work, replace the corresponding modules according to the integration guide.
+- Responsive desktop and mobile interface
+- Eight building types with different costs and environmental effects
+- Interactive 6 × 6 city grid
+- Turn-based resource simulation and Eco Score calculation
+- Five final city rating levels
+- Local browser save, load and reset support
+- Save-success dialog after a manual save
+- Keyboard-accessible controls and status feedback
+- Automated state and event tests
 
-## Getting Started
+## Requirements
 
-Node.js 22.12 or later and npm are required. Open a terminal in the `eco-city` folder containing this file and run:
+- Node.js 22.12 or later
+- npm
+
+## Install and Run
+
+Clone the repository and install its dependencies:
 
 ```sh
+git clone https://github.com/Wang060621/eco-city.git
+cd eco-city
 npm install
 npm run dev
 ```
 
-Open the local address shown in the terminal, usually `http://localhost:5173`. Do not open `index.html` by double-clicking it; ES modules require a development server.
+Open the local address shown in the terminal, usually `http://localhost:5173`.
+
+Do not open `index.html` directly. The project uses ES modules and must run through the Vite development server.
+
+## Commands
 
 ```sh
-npm test         # Developer 1's state and event tests
-npm run build    # Generate production files in dist
+npm run dev      # Start the development server
+npm test         # Run the automated tests
+npm run build    # Create the production build in dist/
 npm run preview  # Preview the production build locally
 ```
 
-`node_modules` is intentionally excluded from this package. Install the dependencies before running the project for the first time. `package-lock.json` locks dependency versions.
+## Project Structure
 
-## Files to Read First
+```text
+src/
+├── city/        # Interactive city grid
+├── core/        # Shared game state and event bus
+├── data/        # Building definitions and balance values
+├── simulation/  # Purchases, turns, scoring and final ratings
+├── storage/     # Browser save and load support
+├── ui/          # Dashboard and game screens
+├── main.js      # Application wiring and user interactions
+└── style.css    # Main responsive styling
 
-| File | Purpose |
-| --- | --- |
-| `INTEGRATION_GUIDE.md` | Complete directory structure, team responsibilities, all interfaces, page mounting points, and merge workflow |
-| `MERGE_NOTES.md` | Exact copy locations for each developer's files, placeholder file list, dependencies, and limitations |
-| `CONTRIBUTION.md` | My completed work, design decisions, and suggested evidence for coursework |
-| `VERIFICATION.md` | Actual test and build results, along with the commands used |
-| `CONTRIBUTION.md` | Recommended screenshots to capture as coursework evidence |
-| `lead-tests/` | Developer 1's targeted checks; these do not replace Developer 6's comprehensive tests |
+lead-tests/      # Automated and browser verification tests
+```
 
-Recommended integration order: **Developer 2: building data → Developer 3: grid → Developer 4: simulation → Developer 5: interface → Developer 6: storage and testing → full end-to-end review**.
+## Save Data
 
-`lead-tests/fixtures/` is intended solely for testing successful execution paths in subsequent browser checks. Do not copy these files into `src/`. This delivery does not implement or claim to have verified final scoring, building balance, recovery from corrupted saves, or other areas assigned to the remaining developers.
+Game progress is stored in the browser's local storage on the current device. A successful manual save displays a confirmation dialog. Resetting the game also removes the saved city.
+
+## Verification
+
+The project has been verified from a clean GitHub clone:
+
+- Dependencies install successfully with `npm ci`.
+- All 37 automated tests pass.
+- The production build completes successfully.
+- The application loads without browser errors.
+- Building placement, turn progression, saving, the success dialog and save restoration after reload all work.
+
+Generated folders such as `node_modules/` and `dist/` are intentionally excluded from the repository. They are recreated by `npm install` and `npm run build`.
